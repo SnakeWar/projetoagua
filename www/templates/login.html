@@ -1,0 +1,26 @@
+<ion-view view-title="Login">
+    <ion-content>
+        <br>
+        <br>
+        <div class="login">
+        <form class="form-group">
+            <label class="item item-input">
+                <span class="input-label">Email</span>
+                <input type="email" ng-model="user.email" name="login">
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Senha</span>
+                <input type="password" ng-model="user.password" name="password">
+            </label>
+        </form>
+        </div>
+        <div class="login2">
+        <button class="btn btn-success btn-block btn-lg" ng-click="login()">
+            Entrar
+        </button>
+        <button class="btn btn-primary btn-block btn-lg" ng-click="cadastro()">
+            Cadastrar
+        </button>
+        </div>
+    </ion-content>
+</ion-view>
