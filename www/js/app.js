@@ -8,8 +8,8 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 
     .run(function ($ionicPlatform) {
         $ionicPlatform.ready(function () {
-            var APPLICATION_ID = '3D004C77-D18C-7323-FF54-6F16A933B200',
-                SECRET_KEY = 'E8960A4F-B916-3C20-FF29-6A05B623D400',
+            var APPLICATION_ID = 'EDD5EF81-B116-0283-FFBC-882039CBD300',
+                SECRET_KEY = 'B3852464-61E5-D482-FF68-F55728885300',
                 VERSION = 'v1'; //default application version;
             Backendless.initApp(APPLICATION_ID, SECRET_KEY, VERSION);
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
