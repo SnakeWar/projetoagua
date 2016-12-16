@@ -25,7 +25,7 @@
     <plugin name="cordova-plugin-whitelist" spec="1.2.2"/>
     <plugin name="org.apache.cordova.splashscreen"/>
     <plugin name="org.apache.cordova.inappbrowser" />
-    <plugin name="org.apache.cordova.statusbar" source="pgb"/>
+    
 
     <!-- Platforms -->
     <platform name="ios" />
