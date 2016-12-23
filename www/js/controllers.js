@@ -54,7 +54,7 @@ angular.module('starter.controllers', [])
 
             Backendless.UserService.logout( new Backendless.Async( userLoggedout, gotError ) );
         }
-        $scope.trocarsenha = function(){
+        $scope.trocarNome = function(){
             $state.go('senha');
         }       
 
