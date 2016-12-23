@@ -1,22 +1,22 @@
 <ion-view view-title="Senha">
     <ion-content>
-        <h2 style="text-align: center">Atualização de Senha</h2>
+        <h2 style="text-align: center">Atualização de Nome</h2>
         <label class="item item-input">
             <span class="input-label">E-mail</span>
             <input type="email" required ng-model="user.email" name="password">
         </label>
         <label class="item item-input">
-            <span class="input-label">Senha Antiga</span>
+            <span class="input-label">Senha</span>
             <input type="password" ng-model="user.password" name="password">
         </label>
         <label class="item item-input">
-            <span class="input-label">Senha Nova</span>
-            <input type="password" ng-model="user.newpassword" name="password">
+            <span class="input-label">Nome</span>
+            <input type="text" ng-model="user.name" name="name">
         </label>
-        <button class="button button-block button-balanced" ng-click="updatesenha()">
+        <button class="button button-block button-balanced" ng-click="updateName()">
             Atualizar Senha
         </button>
-        <button class="button button-block button-positive" ng-click="voltarconta()">
+        <button class="button button-block button-positive" ng-click="voltarConta()">
             Voltar
         </button>
 </ion-content>

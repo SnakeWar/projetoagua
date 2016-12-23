@@ -109,43 +109,46 @@ angular.module('starter.controllers', [])
 })
 .controller('PassCtrl', function($scope, $state, $ionicPopup){
     $scope.user = {};
-    var user = {};
-    var user2 = {};
-    console.log($scope.user.passsword);
-    $scope.updatesenha = function(){
-        function userLoggedIn( user )
+
+
+    $scope.updateName = function(){
+
+        var user;
+
+        try
         {
-            loggedInUser = user;
-            updateUser();
+            user = Backendless.UserService.login( $scope.user.email, $scope.user.password );
         }
-        function gotError( err ) // see more on error handling
+        catch( err )
         {
+            // login failed
+            console.log( "error message - " + err.message );
+            console.log( "error code - " + err.statusCode );
+        }
+
+        try
+        {
+            user.name = $scope.user.name;
+            user = Backendless.UserService.update( user );
+            $ionicPopup.alert({
+                title: 'Dado Alterado!',
+                template: '<p style="text-align: center">Atualização bem sucedida.</p>'
+            });
+            $scope.user = '';
+        }
+        catch( err )
+        {
+            // update failed
             console.log( "error message - " + err.message );
             console.log( "error code - " + err.statusCode );
             $ionicPopup.alert({
-                title: 'Senha não foi alterada!',
-                template: '' + err.message + ''
+                title: 'Dado não foi alterado!',
+                template: '<p style="text-align: center">' + err.message + '</p>'
             });
+            $scope.user = '';
         }
-
-        function userUpdated( user )
-        {
-            user.password = $scope.user.newpassword;
-            console.log( "user has been updated" );
-            this.loggedInUser = user;
-            $ionicPopup.alert({
-                title: 'Senha Alterada!',
-                template: 'Troca de senha bem sucedida.'
-            });
-        }
-        user2.email = Backendless.UserService.getCurrentUser();
-        user.email = user2.email;
-
-        console.log(user.email);
-        user.password = $scope.user.password;
-        Backendless.UserService.login( user, new Backendless.Async( userUpdated, gotError ) );
     }
-    $scope.voltarconta = function(){
+    $scope.voltarConta = function(){
         $state.go('tab.conta');
     }
 });
