@@ -1,6 +1,8 @@
 angular.module('starter.controllers', [])
 
     .controller('LoginCtrl', function ($scope, $ionicPopup, $state) {
+        
+
         Backendless.enablePromises();
         function userLoggedIn(user) {
             console.log("USER: " + $scope.user.email + " SENHA: " + $scope.user.password);
