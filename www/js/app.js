@@ -12,6 +12,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
                 SECRET_KEY = 'B3852464-61E5-D482-FF68-F55728885300',
                 VERSION = 'v1'; //default application version;
             Backendless.initApp(APPLICATION_ID, SECRET_KEY, VERSION);
+            /*Backendless.enablePromises();*/
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
             if (window.cordova && window.cordova.plugins.Keyboard) {
@@ -83,4 +84,5 @@ angular.module('starter', ['ionic', 'starter.controllers'])
             });
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('login');
+
     });

@@ -7,7 +7,7 @@ angular.module('starter.controllers', [])
         function userLoggedIn(user) {
             console.log("USER: " + $scope.user.email + " SENHA: " + $scope.user.password);
             console.log("user has logged in");
-            delete $scope.user;
+            $scope.user = {};
             $state.go('tab.sobre');
 
         }
@@ -40,27 +40,32 @@ angular.module('starter.controllers', [])
 
     .controller('ContaCtrl', function($scope, $state, $ionicPopup) {
         $scope.logout = function () {
-
-            function gotError( err ) // see more on error handling
+            var userLogged = Backendless.UserService.getCurrentUser();
+            if( userLogged == null )
             {
-                console.log( "error message - " + err.message );
-                console.log( "error code - " + err.statusCode );
-            }
-
-            function userLoggedout()
-            {
-                console.log( "user has been logged out" );
                 $state.go('login');
             }
+            try {
+                // now log out:
+                if (Backendless.UserService.logout()) {
+                    $ionicPopup.alert({
+                        title: 'Você saiu!',
+                        template: '<p style="text-align: center">Você saiu com sucesso!</p>'
+                    });
+                    $state.go('login');
+                }
 
-
-            Backendless.UserService.logout( new Backendless.Async( userLoggedout, gotError ) );
+            }
+            catch (err) // see more on error handling
+            {
+                // logout failed, to get the error code, call err.statusCode
+                console.log("error message - " + err.message);
+                console.log("error code - " + err.statusCode);
+            }
         }
-        $scope.trocarNome = function(){
+        $scope.trocarNome = function () {
             $state.go('senha');
-        }       
-
-
+        }
     })
 
     .controller('AppCtrl', function($scope, $state) {
@@ -110,16 +115,20 @@ angular.module('starter.controllers', [])
         
 })
 .controller('PassCtrl', function($scope, $state, $ionicPopup){
-    $scope.user = {};
 
+    $scope.user = {};
 
     $scope.updateName = function(){
 
-        var user;
+        var user= {};
+        user.email = $scope.user.email;
+        user.password = $scope.user.password;
+        console.log(user.email+' '+user.password);
 
         try
         {
-            user = Backendless.UserService.login( $scope.user.email, $scope.user.password );
+            user = Backendless.UserService.login( user.email, user.password );
+            
         }
         catch( err )
         {
@@ -130,25 +139,20 @@ angular.module('starter.controllers', [])
 
         try
         {
-            user.name = $scope.user.name;
+            user.password = $scope.user.newpassword;
             user = Backendless.UserService.update( user );
-            $ionicPopup.alert({
-                title: 'Dado Alterado!',
-                template: '<p style="text-align: center">Atualização bem sucedida.</p>'
-            });
-            $scope.user = '';
+            console.log(user.email+' '+user.password);
+            $scope.user = {};
         }
         catch( err )
         {
             // update failed
             console.log( "error message - " + err.message );
             console.log( "error code - " + err.statusCode );
-            $ionicPopup.alert({
-                title: 'Dado não foi alterado!',
-                template: '<p style="text-align: center">' + err.message + '</p>'
-            });
-            $scope.user = '';
+            console.log(user.email+' '+user.password);
+            $scope.user = {};
         }
+
     }
     $scope.voltarConta = function(){
         $state.go('tab.conta');
