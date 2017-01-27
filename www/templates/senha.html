@@ -4,15 +4,15 @@
         <h2 style="text-align: center">Atualização de Senha</h2>
         <label class="item item-input">
             <span class="input-label">E-mail</span>
-            <input type="email" required ng-model="user.email" name="password">
+            <input type="email" required ng-model="user.email" required name="password">
         </label>
         <label class="item item-input">
             <span class="input-label">Senha</span>
-            <input type="password" ng-model="user.password" name="password">
+            <input type="password" ng-model="user.password" required name="password">
         </label>
         <label class="item item-input">
             <span class="input-label">Nova Senha</span>
-            <input type="text" ng-model="user.newpassword" name="newpassword">
+            <input type="text" ng-model="user.newpassword" required name="newpassword">
         </label>
         <button class="button button-block button-balanced" ng-click="updateName()">
             Atualizar Senha
