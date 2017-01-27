@@ -34,7 +34,27 @@ angular.module('starter.controllers', [])
         }
     })
 
-    .controller('SobreCtrl', function($scope) {})
+    .controller('SobreCtrl', function($scope) {
+        $scope.nomeUser = {};
+        function getUsuario(){
+            var user = new Backendless.User();
+            var nomeUser;
+            var user2 = Backendless.UserService.getCurrentUser();
+            if( user2 != null )
+            {
+                // get user's phone number (i.e. custom property)
+                nomeUser = user2[ "name" ];
+                console.log( "Nome:" + nomeUser );
+            }
+            else
+            {
+                console.log( "User hasn't been logged" );
+            }
+            console.log(nomeUser);
+            $scope.nomeUser = "Olá";
+        }
+        getUsuario();
+    })
 
     .controller('PedidoCtrl', function($scope) {})
 
