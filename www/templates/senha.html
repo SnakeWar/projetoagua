@@ -8,12 +8,15 @@
         </label>
         <label class="item item-input">
             <span class="input-label">Senha</span>
-            <input type="password" ng-model="user.password" required name="password">
+            <input type="password" ng-model="user.password" required name="password" ng-hide="showPassword">
+            <input type="text" ng-model="user.password" required name="password" ng-show="showPassword">
         </label>
         <label class="item item-input">
             <span class="input-label">Nova Senha</span>
-            <input type="text" ng-model="user.newpassword" required name="newpassword">
+            <input type="password" ng-model="user.newpassword" required name="newpassword" ng-hide="showPassword">
+            <input type="text" ng-model="user.newpassword" required name="newpassword" ng-show="showPassword">
         </label>
+            <ion-checkbox on-touch="showPassword = !showPassword">Mostrar Senha</ion-checkbox>
         <button class="button button-block button-balanced" ng-click="updateName()">
             Atualizar Senha
         </button>

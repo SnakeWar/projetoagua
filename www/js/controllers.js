@@ -13,6 +13,12 @@ angular.module('starter.controllers', [])
                 console.log("USER: " + $scope.user.email + " SENHA: " + $scope.user.password);
                 console.log("user has logged in");
                 $scope.user = {};
+                $ionicLoading.show({
+                    template: 'Loading...',
+                    duration: 3000
+                }).then(function(){
+                    console.log("The loading indicator is now displayed");
+                });
                 $state.go('tab.sobre');
 
             }

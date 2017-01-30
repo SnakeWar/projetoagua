@@ -10,8 +10,10 @@
             </label>
             <label class="item item-input">
                 <span class="input-label">Senha</span>
-                <input type="password" ng-model="user.password" name="password">
+                <input type="password" ng-model="user.password" name="password" ng-hide="showPassword">
+                <input type="text" ng-model="user.password" name="password" ng-show="showPassword">
             </label>
+                <ion-checkbox on-touch="showPassword = !showPassword">Mostrar Senha</ion-checkbox>
         </form>
         </div>
         <div class="login2">
