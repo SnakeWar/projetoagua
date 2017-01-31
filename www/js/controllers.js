@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-    .controller('LoginCtrl', function ($scope, $ionicPopup, $state) {
+    .controller('LoginCtrl', function ($scope, $ionicPopup, $state, $ionicLoading) {
 
         $scope.user = {};
         var user = {};
@@ -8,16 +8,18 @@ angular.module('starter.controllers', [])
             Backendless.enablePromises();
             user.email = $scope.user.email;
             user.password = $scope.user.password;
-
+            $ionicLoading.show({
+                template: 'Carregando...',
+                duration: 3000
+            }).then(function(){
+                console.log("The loading indicator is now displayed");
+            });
             function userLoggedIn(user) {
                 console.log("USER: " + $scope.user.email + " SENHA: " + $scope.user.password);
                 console.log("user has logged in");
                 $scope.user = {};
-                $ionicLoading.show({
-                    template: 'Loading...',
-                    duration: 3000
-                }).then(function(){
-                    console.log("The loading indicator is now displayed");
+                $ionicLoading.hide().then(function() {
+                    console.log("The loading indicator is now hidden");
                 });
                 $state.go('tab.sobre');
 
@@ -27,7 +29,10 @@ angular.module('starter.controllers', [])
             {
                 console.log("error message - " + err.message);
                 console.log("error code - " + err.statusCode);
-                var alertPopup = $ionicPopup.alert({
+                $ionicLoading.hide().then(function() {
+                    console.log("The loading indicator is now hidden");
+                });
+                $ionicPopup.alert({
                     title: 'Login falhou!',
                     template: '' + err.message + ''
                 });
@@ -35,12 +40,33 @@ angular.module('starter.controllers', [])
 
             Backendless.UserService.login(user.email, user.password).then(userLoggedIn).catch(gotError);
         };
+        $scope.loginFacebook = function () {
+
+            loginUserAsync();
+
+            function handleResponse(loggedInUser){
+                console.log( "User has been logged in - " + loggedInUser.objectId);
+            }
+
+            function handleFault(backendlessFault){
+                console.log( "Server reported an error - ");
+                console.log(backendlessFault.message);
+                console.log(backendlessFault.statusCode);
+            }
+
+            function loginUserAsync() {
+                var callback = new Backendless.Async(handleResponse, handleFault);
+                Backendless.UserService.login("spidey@backendless.com", "greeng0blin", callback);
+            }
+        };
         $scope.cadastro = function () {
             $state.go('cadastrar');
         }
     })
 
     .controller('SobreCtrl', function($scope) {
+
+
         $scope.nomeUser = {};
         function getUsuario(){
             var user = new Backendless.User();
@@ -92,7 +118,7 @@ angular.module('starter.controllers', [])
                 console.log("error message - " + err.message);
                 console.log("error code - " + err.statusCode);
             }
-        }
+        };
         $scope.trocarNome = function () {
             $state.go('senha');
         }
@@ -110,22 +136,39 @@ angular.module('starter.controllers', [])
         }
     })
 
-.controller('CadCtrl', function($scope, $ionicPopup, $state){
+.controller('CadCtrl', function($scope, $ionicPopup, $state, $ionicLoading){
     Backendless.enablePromises();
     $scope.user = {};
     $scope.cadastrar = function(){
-     function userRegistered( user )
-        {
-            console.log( "user has been registered" );
+
+        $ionicLoading.show({
+            template: 'Carregando...',
+            duration: 3000
+        }).then(function(){
+            console.log("The loading indicator is now displayed");
+        });
+        function popUp(){
             $ionicPopup.alert({
                 title: 'Cadastrado!',
                 template: 'Seja Bem-Vindo'
             });
         }
+     function userRegistered( user )
+        {
+            console.log( "user has been registered" + user );
+            $ionicLoading.hide().then(function() {
+                console.log("The loading indicator is now hidden");
+            });
+            $scope.user = {};
+            popUp();
+        }
         function gotError( err ) // see more on error handling
         {
             console.log( "error message - " + err.message );
             console.log( "error code - " + err.statusCode );
+            $ionicLoading.hide().then(function() {
+                console.log("The loading indicator is now hidden");
+            });
             $ionicPopup.alert({
                 title: 'Cadastro Falhou!',
                 template: '' + err.message + ''
@@ -137,20 +180,23 @@ angular.module('starter.controllers', [])
         user.password = $scope.user.password;
         user.name = $scope.user.name;
         Backendless.UserService.register(user).then(userRegistered).catch(gotError);
-        $scope.user = {};
-     }
-     $scope.voltar = function(){
-        $state.go('login');
+
      }
         
 })
-.controller('PassCtrl', function($scope, $state, $ionicPopup){
+.controller('PassCtrl', function($scope, $state, $ionicPopup, $ionicLoading){
 
     $scope.user = {};
    var user = {};
     /*   var user2 = {};*/
 
     $scope.updateName = function(){
+        $ionicLoading.show({
+            template: 'Carregando...',
+            duration: 3000
+        }).then(function(){
+            console.log("The loading indicator is now displayed");
+        });
         Backendless.enablePromises();
 /*        user.email = $scope.user.email;
         user.password = $scope.user.password;
@@ -167,6 +213,9 @@ angular.module('starter.controllers', [])
 
         function gotError( err ) // see more on error handling
         {
+            ionicLoading.hide().then(function() {
+                console.log("The loading indicator is now hidden");
+            });
             $ionicPopup.alert({
                 title: 'Alteração de senha:',
                 template: '<p style="text-align: center">E-mail/Senha incorreto(s)/incompleto(s)!</p>'
@@ -175,6 +224,9 @@ angular.module('starter.controllers', [])
 
         function gotError2( err ) // see more on error handling
         {
+            ionicLoading.hide().then(function() {
+                console.log("The loading indicator is now hidden");
+            });
             $ionicPopup.alert({
                 title: 'Senha não foi alterado!',
                 template: '<p style="text-align: center">' + err.message + '</p>'
@@ -183,6 +235,9 @@ angular.module('starter.controllers', [])
         
         function userUpdated( user )
         {
+            $ionicLoading.hide().then(function() {
+                console.log("The loading indicator is now hidden");
+            });
             $ionicPopup.alert({
                 title: 'Alteração de senha:',
                 template: '<p style="text-align: center">Senha alterada com sucesso!</p>'
