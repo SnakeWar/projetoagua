@@ -187,7 +187,7 @@ angular.module('starter.controllers', [])
 .controller('PassCtrl', function($scope, $state, $ionicPopup, $ionicLoading){
 
     $scope.user = {};
-   var user = {};
+    var user = {};
     /*   var user2 = {};*/
 
     $scope.updateName = function(){
@@ -198,7 +198,7 @@ angular.module('starter.controllers', [])
             console.log("The loading indicator is now displayed");
         });
         Backendless.enablePromises();
-/*        user.email = $scope.user.email;
+/*      user.email = $scope.user.email;
         user.password = $scope.user.password;
         user2.password = $scope.user.newpassword;
         console.log($scope.user.email + ' ' + $scope.user.password);*/

@@ -1,7 +1,7 @@
-<ion-view view-title="Senha">
+<ion-view view-title="Alteraçao de Senha">
     <ion-content>
         <div class="senha">
-        <h2 style="text-align: center">Atualização de Senha</h2>
+            <form class="form-group">
         <label class="item item-input">
             <span class="input-label">E-mail</span>
             <input type="email" required ng-model="user.email" required name="password">
@@ -17,6 +17,7 @@
             <input type="text" ng-model="user.newpassword" required name="newpassword" ng-show="showPassword">
         </label>
             <ion-checkbox on-touch="showPassword = !showPassword">Mostrar Senha</ion-checkbox>
+                </form>
         <button class="btn btn-block btn-success btn-lg" ng-click="updateName()">
             Atualizar Senha
         </button>
