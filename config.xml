@@ -15,9 +15,6 @@
   <plugin name="cordova-plugin-splashscreen"/>
   <plugin name="cordova-plugin-inappbrowser"/>
   <plugin name="ionic-plugin-keyboard"/>
-  <plugin name="phonegap-plugin-push" source="npm" spec="1.8.0">
-    <param name="SENDER_ID" value="40055508986"/>
-  </plugin>
   <plugin name="cordova-plugin-statusbar">
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
   </plugin>
