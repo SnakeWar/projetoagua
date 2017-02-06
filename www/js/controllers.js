@@ -66,29 +66,39 @@ angular.module('starter.controllers', [])
 
     .controller('SobreCtrl', function($scope) {
 
+        $scope.pessoas = {};
 
-        $scope.nomeUser = {};
-        function getUsuario(){
-            var user = new Backendless.User();
-            var nomeUser;
-            var user2 = Backendless.UserService.getCurrentUser();
-            if( user2 != null )
-            {
-                // get user's phone number (i.e. custom property)
-                nomeUser = user2[ "name" ];
-                console.log( "Nome:" + nomeUser );
-            }
-            else
-            {
-                console.log( "User hasn't been logged" );
-            }
-            console.log(nomeUser);
-            $scope.nomeUser = "Olá";
-        }
-        getUsuario();
+        var contactsCollection = Backendless.Persistence.of( Contact ).find();
+        $scope.pessoas = contactsCollection.data;
     })
 
-    .controller('PedidoCtrl', function($scope) {})
+    .controller('PedidoCtrl', function($scope) {
+        $scope.pessoa = {};
+        var pessoa = {};
+$scope.adicionar = function () {
+    pessoa = $scope.pessoa;
+
+    function Contact(args) {
+        args = args || {};
+        this.name = args.name || "";
+        this.funcao = args.funcao || "";
+    }
+    function objectSaved( pessoa )
+    {
+        pessoa = $scope.pessoa;
+        console.log( "object has been saved" );
+    }
+
+    function gotError( err )
+    {
+        console.log( "error message - " + err.message );
+        console.log( "error code - " + err.statusCode );
+    }
+
+    Backendless.Persistence.of( Contact ).save( pessoa, new Backendless.Async( objectSaved, gotError ) );
+}
+
+    })
 
     .controller('ContaCtrl', function($scope, $state, $ionicPopup) {
         $scope.logout = function () {

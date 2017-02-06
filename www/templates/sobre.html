@@ -1,7 +1,13 @@
 <ion-view view-title="Feed">
 
     <ion-content>
-        <h1>Sobre!</h1>
-        {{nomeUser}}
+        <ion-list>
+            <ion-item ng-repeat="pessoa in pessoas">
+            <div class="list branco">
+                Nome: {{pessoa.name}}
+                Função: {{pessoa.funcao}}
+            </div>
+            </ion-item>
+        </ion-list>
     </ion-content>
 </ion-view>

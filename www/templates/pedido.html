@@ -1,6 +1,23 @@
 <ion-view view-title="Pedido">
-    
     <ion-content>
-        <h1>Pedidos!</h1>
+        <br>
+        <br>
+        <div class="login">
+            <form class="form-group">
+                <label class="item item-input">
+                    <span class="input-label">Nome</span>
+                    <input type="text" ng-model="pessoa.nome" name="login">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Função</span>
+                    <input type="text" ng-model="pessoa.funcao" name="password">
+                </label>
+            </form>
+        </div>
+        <div class="login2">
+            <button class="btn btn-success btn-block btn-lg" ng-click="adicionar()">
+                Adicionar
+            </button>
+        </div>
     </ion-content>
 </ion-view>
