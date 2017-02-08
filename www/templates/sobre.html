@@ -1,13 +1,15 @@
 <ion-view view-title="Feed">
 
     <ion-content>
-        <ion-list>
-            <ion-item ng-repeat="pessoa in pessoas">
-            <div class="list branco">
-                Nome: {{pessoa.name}}
-                Função: {{pessoa.funcao}}
+
+        <ion-item ng-repeat="pessoa in pessoas">
+            <div class="list">
+                <ion-list>
+                    Nome: {{pessoa.reward.name}}<br>
+                    Endereço: {{pessoa.address}}
+                </ion-list>
             </div>
-            </ion-item>
-        </ion-list>
+        </ion-item>
+
     </ion-content>
 </ion-view>

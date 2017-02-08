@@ -2,7 +2,7 @@
 <widget id="org.brazcanchamber.events.app" version="1.1.0" android-packageName="org.brazcanchamber.events.app" ios-CFBundleIdentifier="org.brazcanchamber.app" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>Learning Ionic</name>
   <description>Learning Ionic</description>
-  <author email="mayrcon_marlon@hotmail.com" href="#">SnakeWar</author>
+  <author email="mayrcon_marlon@hotmail.com" href="">SnakeWar</author>
   <content src="index.html"/>
   <access origin="*"/>
   <allow-intent href="http://*/*"/>
@@ -23,7 +23,7 @@
   <preference name="StatusBarOverlaysWebView" value="true"/>
   <preference name="ios-statusbarstyle" value="black-opaque"/>
   <preference name="SplashScreen" value="screen"/>
-  <preference name="SplashScreenDelay" value="2000"/>
+  <preference name="SplashScreenDelay" value="3000"/>
   <preference name="FadeSplashScreen" value="false"/>
   <preference name="ShowSplashScreenSpinner" value="true"/>
   <preference name="android-minSdkVersion" value="15"/>

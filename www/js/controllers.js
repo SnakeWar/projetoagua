@@ -67,9 +67,22 @@ angular.module('starter.controllers', [])
     .controller('SobreCtrl', function($scope) {
 
         $scope.pessoas = {};
+        var pessoa = {};
+        function Company(args) {
+            args = args || {};
+            this.name = args.name || "";
+            this.address = args.address || "";
+        }
 
-        var contactsCollection = Backendless.Persistence.of( Contact ).find();
-        $scope.pessoas = contactsCollection.data;
+        function objectData(pessoa) {
+            $scope.pessoas = pessoa.data;
+            console.log($scope.pessoas);
+        }
+        function gotError(err) {
+            console.log('deu merda');
+        }
+        Backendless.Persistence.of( Company ).find( pessoa, new Backendless.Async( objectData, gotError )  );
+
     })
 
     .controller('PedidoCtrl', function($scope) {
@@ -78,14 +91,8 @@ angular.module('starter.controllers', [])
 $scope.adicionar = function () {
     pessoa = $scope.pessoa;
 
-    function Contact(args) {
-        args = args || {};
-        this.name = args.name || "";
-        this.funcao = args.funcao || "";
-    }
     function objectSaved( pessoa )
     {
-        pessoa = $scope.pessoa;
         console.log( "object has been saved" );
     }
 
@@ -95,7 +102,7 @@ $scope.adicionar = function () {
         console.log( "error code - " + err.statusCode );
     }
 
-    Backendless.Persistence.of( Contact ).save( pessoa, new Backendless.Async( objectSaved, gotError ) );
+    Backendless.Persistence.of( Company ).save( pessoa, new Backendless.Async( objectSaved, gotError ) );
 }
 
     })
